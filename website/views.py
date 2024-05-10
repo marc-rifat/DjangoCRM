@@ -70,6 +70,19 @@ def delete_record(request, pk):
         return redirect('home')
 
 
+def delete_all_records(request):
+    if request.user.is_authenticated:
+        if Record.objects.count() > 0:
+            Record.objects.all().delete()
+            messages.success(request, "All records deleted successfully...")
+        else:
+            messages.info(request, "Nothing to delete.")
+        return redirect('home')
+    else:
+        messages.success(request, "You must be logged in to do that...")
+        return redirect('home')
+
+
 def add_record(request):
     form = AddRecordForm(request.POST or None)
     if request.user.is_authenticated:
