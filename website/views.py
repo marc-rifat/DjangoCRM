@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+from faker import Faker
+
 from .forms import SignUpForm, AddRecordForm
 from .models import Record
 
@@ -95,6 +97,26 @@ def add_record(request):
     else:
         messages.success(request, "You Must Be Logged In...")
         return redirect('home')
+
+
+def add_mock_record(request):
+    fake = Faker()
+    if request.user.is_authenticated:
+        new_record = Record(
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            email=fake.email(),
+            phone=fake.phone_number(),
+            address=fake.address(),
+            city=fake.city(),
+            state=fake.state(),
+            zipcode=fake.zipcode()
+        )
+        new_record.save()
+        messages.success(request, "Record Added...")
+        return redirect('home')
+    else:
+        messages.success(request, "You Must Be Logged In To Do That...")
 
 
 def update_record(request, pk):
