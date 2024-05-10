@@ -16,24 +16,19 @@ This Django project is designed to demonstrate a robust web application framewor
 - **Frontend**: Bootstrap, HTML5, CSS3
 
 ### Prerequisites
-- Python 3.9+
+- Python 3.10+
 - pip
 - Virtualenv (recommended)
 
 ### Installation
 ```bash
 git clone https://github.com/marc-rifat/DjangoCRM.git
-
 python -m venv env
 source env/bin/activate  # On Windows use `env\Scripts\activate`
-
 pip install -r requirements.txt
-
 python manage.py makemigrations
 python manage.py migrate
-python manage.py createsuperuser # default[sqlite3] username: admin password: admin
-
-python manage.py runserver 
+python manage.py runserver # username: admin password: admin
 ```
 
 
